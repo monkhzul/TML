@@ -1,0 +1,9 @@
+.App {
+    height: 100vh;
+}
+.customerForm > * {
+    border-radius: 0.5rem;
+}
+.price::placeholder {
+    padding-left: 0.5rem;
+}

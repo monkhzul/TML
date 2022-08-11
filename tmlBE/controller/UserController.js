@@ -3,7 +3,7 @@ const { QueryTypes } = require('sequelize');
 
 exports.getCustomer = async(req, res) => {
 
-    const customer = await db.sequelize.query(`select t.*, p.InCase, pr.BPrice 
+    const customer = await db.sequelize.query(`select p.InCase, pr.BPrice, p.Article
     from SMTTerms.dbo.vGoods_Elements t
     left join SMTTerms.dbo.t_Products p
     on t.Article=p.Article

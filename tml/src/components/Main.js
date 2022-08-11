@@ -1,12 +1,22 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import Table from 'react-bootstrap/Table'
 import excel from '../images/svg/excel.svg'
 import * as XLSX from 'xlsx'
+import {CSVLink} from 'react-csv'
 
 export default function Main() {
     const [data, setData] = useState([]);
 
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        const get = async () => {
+            const req = await fetch('http://localhost:8088/api/tml');
+            const res = await req.json();
+            setData(res);
+        }
+        get();
+    }, [])
 
     const handleClick = () => {
         // inputRef.current.click();
@@ -20,9 +30,13 @@ export default function Main() {
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(worksheet)
 
-        setData(jsonData);
+     
         console.log(jsonData)
     };
+
+    function ExportToExcel() {
+
+    }
    
   return (
     <div className='App p-3'>
@@ -48,10 +62,10 @@ export default function Main() {
                 <button type="file" id="fileSelect" className='border lg:h-[30%] w-[40%] px-3 font-semibold hover:bg-slate-200' onClick={handleClick}>Листээр оруулах</button>
 
                 <button type="submit" className='border lg:h-[30%] w-[40%] px-3 flex items-center hover:bg-slate-200'>
-                    <div className='w-full flex justify-around'>
-                        <img src={excel} alt="" className='w-[20%] sm:w-[50%] md:w-[25%] xl:w-[15%] p-1 sm:p-0 mr-2'/>
-                        <p className='my-auto font-semibold'> Export To Excel </p>
-                    </div>
+                    <CSVLink data={data} className="text-black font-semibold no-underline w-full flex justify-center">
+                            <img src={excel} alt="" className='w-[30%] sm:w-[50%] md:w-[25%] xl:w-[15%] p-1 sm:p-0 mr-2'/>
+                            <p className='my-auto font-semibold'> Export To Excel </p>
+                    </CSVLink>
                 </button>
             </form>
         </div>
@@ -67,14 +81,14 @@ export default function Main() {
                         </tr>
                     </thead>
                     <tbody>
-                    {/* {data === "" ? "" : data.map((res, i) => {
+                    {data === "" ? "" : data.map((res, i) => 
                         <tr>
-                            <td>{i}</td>
-                            <td>{res.Firstname}</td>
-                            <td>{res.Lastname}</td>
-                            <td>{res.Email}</td>
+                            <td>{i+1}</td>
+                            <td>{res.Article}</td>
+                            <td>{res.BPrice}</td>
+                            <td>{res.InCase}</td>
                         </tr>
-                    })} */}
+                    )}
                     </tbody>
                 </Table>
             

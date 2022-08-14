@@ -34,6 +34,13 @@ export default function Main() {
         console.log(jsonData)
     };
 
+    const Send = () => {
+        const customer = document.getElementById("select").value;
+        const price = document.getElementById("price").value;
+
+        console.log(price)
+    }
+
     function ExportToExcel() {
 
     }
@@ -41,7 +48,7 @@ export default function Main() {
   return (
     <div className='App p-3'>
         <div className='head flex flex-col sm:flex-row w-full'>
-            <form action="" className='customerForm flex flex-col w-full sm:w-2/3'>
+            <div action="" className='customerForm flex flex-col w-full sm:w-2/3'>
                 <div className='w-full flex justify-around'>
                     <div className='flex flex-col w-[40%] customerForm'>
                         <label htmlFor="" className='mx-1 my-1'>Харилцагч</label>
@@ -54,8 +61,9 @@ export default function Main() {
                         <input type="text" name="" id="price" className='border p-1 price' placeholder='Үнийн дүн'/>
                     </div>
                 </div>
-                <button type="submit" className='border w-1/3 p-1 my-3 mx-auto font-semibold hover:bg-slate-200'>Илгээх</button>
-            </form>
+                
+                <button className='border w-1/3 p-1 my-3 mx-auto font-semibold hover:bg-slate-200' onClick={Send}>Илгээх</button>
+            </div>
 
             <form action="" className='customerForm w-full sm:w-1/2 flex justify-around items-center'>
                 <input className='d' type="file" id='file' ref={inputRef} accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={(e) => handleFileChange(e)} />

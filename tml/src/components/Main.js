@@ -42,6 +42,13 @@ export default function Main() {
 
     const pageCount = Math.ceil(data.length / perPage);
 
+    const Send = () => {
+        const customer = document.getElementById("select").value;
+        const price = document.getElementById("price").value;
+
+        console.log(price)
+    }
+
     const changePage = ({ selected }) => {
         setPageNumber(selected)
     }

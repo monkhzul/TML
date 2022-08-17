@@ -2,8 +2,9 @@ import React, { useRef, useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import excel from '../images/svg/excel.svg'
 import * as XLSX from 'xlsx'
-import ReactPaginate from "react-paginate";
+import ReactPaginate from "react-paginate"
 import { CSVLink } from 'react-csv'
+import $ from 'jquery'
 
 export default function Main() {
     const [data, setData] = useState([]);
@@ -65,6 +66,12 @@ export default function Main() {
                 </tr>
             )
         })
+
+        $(document).ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
 
     return (
         <div className='App p-3'>

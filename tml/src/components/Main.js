@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx'
 import ReactPaginate from "react-paginate"
 import { CSVLink } from 'react-csv'
 import $ from 'jquery'
+import Select from 'react-select'
 
 export default function Main() {
     const [data, setData] = useState([]);
@@ -67,11 +68,16 @@ export default function Main() {
             )
         })
 
-        $(document).ready(function () {
-            $('select').selectize({
-                sortField: 'text'
-            });
-        });
+        const options = [];
+
+        for (let i = 0; i < data.length; i++) {
+            options.push({
+                value: data[i].Name,
+                label: data[i].Name
+            }) 
+        }
+
+        console.log(options)
 
     return (
         <div className='App p-3'>
@@ -80,12 +86,9 @@ export default function Main() {
                     <div className='w-full flex justify-around'>
                         <div className='flex flex-col w-[40%] customerForm'>
                             <label htmlFor="" className='mx-1 my-1'>Харилцагч</label>
-                            <select id="select" className='customer border p-1' placeholder='Харилцагч'>
-                                {
-                                    data.map(data =>
-                                        <option value={data.Name}>{data.Name}</option>
-                                    )}
-                            </select>
+                           <Select 
+                            options={options}
+                           />
                         </div>
                         <div className='flex flex-col w-[40%] customerForm'>
                             <label htmlFor="" className='mx-1 my-1'>Үнийн дүн</label>
